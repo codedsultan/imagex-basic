@@ -22,3 +22,5 @@ yarn-error.log
 /.vscode
 /.zed
 .qodo
+cmd.sh
+# herd.yml

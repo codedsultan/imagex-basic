@@ -2,8 +2,9 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "tsc && vite build",
-        "dev": "vite",
+        "routes:generate": "php artisan ziggy:generate --types frontend/ziggy.ts",
+        "build": "npm run routes:generate && tsc && vite build",
+        "dev": "npm run routes:generate && vite",
         "lint": "eslint resources/js --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore --fix"
     },
     "devDependencies": {
