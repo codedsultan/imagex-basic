@@ -24,3 +24,5 @@ yarn-error.log
 .qodo
 cmd.sh
 # herd.yml
+/frontend/user/node_modules
+/frontend/admin/node_modules
