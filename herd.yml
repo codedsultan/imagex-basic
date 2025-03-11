@@ -1,0 +1,9 @@
+name: imagex-basic
+php: '8.3'
+secured: true
+aliases:
+    - users.imagex-basic
+    - admin.imagex-basic
+
+integrations:
+    forge: {  }

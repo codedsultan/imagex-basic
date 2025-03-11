@@ -123,4 +123,11 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'subdomains' => [
+        'users' => env('APP_BUSINESS_SUBDOMAIN', 'users'),
+        'admin' => env('APP_TALENTS_SUBDOMAIN', 'admin'),
+        // 'manage' => env('APP_MANAGE_SUBDOMAIN', 'manage'),
+    ],
+
+    'domain' => env('APP_DOMAIN', 'imagex-basic.test'),
 ];

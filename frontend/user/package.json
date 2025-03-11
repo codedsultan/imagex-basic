@@ -1,12 +1,12 @@
 {
-    "private": true,
-    "type": "module",
+    "name": "user-frontend",
+    "version": "1.0.0",
     "scripts": {
-        "routes:generate": "php artisan ziggy:generate --types frontend/ziggy.ts",
+        "routes:generate": "cd ../../ && php artisan ziggy:generate --types frontend/ziggy.ts",
         "build": "npm run routes:generate && tsc && vite build",
-        "dev": "npm run routes:generate && vite",
-        "lint": "eslint resources/js --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore --fix"
+        "dev": "npm run routes:generate && vite --host"
     },
+    "type": "module",
     "devDependencies": {
         "@headlessui/react": "^2.0.0",
         "@inertiajs/react": "^2.0.0",
@@ -20,6 +20,7 @@
         "@vitejs/plugin-react": "^4.2.0",
         "autoprefixer": "^10.4.12",
         "axios": "^1.7.4",
+        "babel-plugin-react-compiler": "^19.0.0-beta-27714ef-20250124",
         "concurrently": "^9.0.1",
         "eslint": "^8.57.0",
         "eslint-config-prettier": "^9.1.0",
@@ -32,9 +33,16 @@
         "prettier-plugin-organize-imports": "^4.0.0",
         "prettier-plugin-tailwindcss": "^0.6.5",
         "react": "^18.2.0",
+        "react-compiler-runtime": "^19.0.0-beta-bafa41b-20250307",
         "react-dom": "^18.2.0",
         "tailwindcss": "^3.2.1",
         "typescript": "^5.0.2",
-        "vite": "^6.0.11"
+        "vite": "^6.0.11",
+        "vite-plugin-eslint": "^1.8.1",
+        "vite-tsconfig-paths": "^5.1.4",
+        "zustand": "^4.1.3"
+    },
+    "dependencies": {
+        "dotenv": "^16.4.7"
     }
 }
