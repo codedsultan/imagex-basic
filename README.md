@@ -1,4 +1,4 @@
-# Laravel Inertia React Vue JsApplication
+# Laravel Inertia React Vue Js Application
 
 ## Overview
 This is an open-source Laravel Inertia React application that provides a modern full-stack development experience. It utilizes Laravel as the backend, Inertia.js for server-driven frontends, and React for building dynamic user interfaces.
@@ -13,7 +13,7 @@ This is an open-source Laravel Inertia React application that provides a modern 
 
 ## Tech Stack
 - **Backend**: Laravel 12+, PHP 8+
-- **Frontend**: React, Inertia.js, Tailwind CSS
+- **Frontend**: React,VueJs, Inertia.js, Tailwind CSS
 - **Database**: MySQL / PostgreSQL / SQLite
 - **Authentication**: Laravel Sanctum
 - **State Management**: Zustand / Context API
