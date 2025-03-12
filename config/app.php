@@ -124,8 +124,9 @@ return [
     ],
 
     'subdomains' => [
-        'users' => env('APP_BUSINESS_SUBDOMAIN', 'users'),
-        'admin' => env('APP_TALENTS_SUBDOMAIN', 'admin'),
+        'users' => env('APP_USER_SUBDOMAIN', 'users'),
+        'admin' => env('APP_ADMIN_SUBDOMAIN', 'admin'),
+        'saas' => env('APP_SAAS_SUBDOMAIN', 'saas'),
         // 'manage' => env('APP_MANAGE_SUBDOMAIN', 'manage'),
     ],
 
