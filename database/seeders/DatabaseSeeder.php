@@ -32,14 +32,17 @@ class DatabaseSeeder extends Seeder
 
         $admin->assignRole('admin');
 
+        $user = User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+        ]);
+
+        $user->assignRole('user');
         // Create additional dummy users and assign them the 'user' role
         User::factory(10)->create()->each(function ($user) {
             $user->assignRole('user');
         });
 
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        
     }
 }

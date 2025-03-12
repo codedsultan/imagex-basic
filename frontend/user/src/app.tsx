@@ -1,4 +1,5 @@
-// import '../css/app.css';
+import '../css/app.css';
+import './bootstrap';
 // import './bootstrap';
 import React, { useEffect } from 'react';
 

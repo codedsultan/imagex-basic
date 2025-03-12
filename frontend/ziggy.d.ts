@@ -7,7 +7,6 @@ declare module 'ziggy-js' {
     "profile.update": [],
     "profile.destroy": [],
     "register": [],
-    "user.register": [],
     "login": [],
     "password.request": [],
     "password.email": [],
@@ -33,7 +32,38 @@ declare module 'ziggy-js' {
     "password.confirm": [],
     "password.update": [],
     "logout": [],
-    "user.updateProfile": [],
+    "user.landing": [],
+    "user.dashboard": [],
+    "user.profile.edit": [],
+    "user.profile.update": [],
+    "user.profile.destroy": [],
+    "user.register": [],
+    "user.": [],
+    "user.login": [],
+    "user.password.request": [],
+    "user.password.email": [],
+    "user.password.reset": [
+        {
+            "name": "token",
+            "required": true
+        }
+    ],
+    "user.password.store": [],
+    "user.verification.notice": [],
+    "user.verification.verify": [
+        {
+            "name": "id",
+            "required": true
+        },
+        {
+            "name": "hash",
+            "required": true
+        }
+    ],
+    "user.verification.send": [],
+    "user.password.confirm": [],
+    "user.password.update": [],
+    "user.logout": [],
     "storage.local": [
         {
             "name": "path",

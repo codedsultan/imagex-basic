@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Modules\User\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
@@ -16,11 +16,10 @@ class AuthenticatedSessionController extends Controller
     /**
      * Display the login view.
      */
-    public function create()
+    public function create(): Response
     {
-        return redirect()->intended(session('login_redirect', '/'));
         return Inertia::render('Auth/Login', [
-            'canResetPassword' => Route::has('password.request'),
+            'canResetPassword' => Route::has('user.password.request'),
             'status' => session('status'),
         ]);
     }
@@ -34,7 +33,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        return redirect()->intended(route('user.dashboard', absolute: false));
     }
 
     /**
@@ -42,6 +41,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
+        
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();
@@ -50,23 +50,4 @@ class AuthenticatedSessionController extends Controller
 
         return redirect('/');
     }
-
-
-    protected function redirectTo()
-    {
-        $host = request()->getHost();
-
-        // Customize these as needed for your domains.
-        if ($host === 'admin.imagex-basic.test' || $host === 'admin.imagex-basic') {
-            return route('admin.login');
-        }
-
-        if ($host === 'users.imagex-basic.test' || $host === 'users.imagex-basic') {
-            return route('user.login');
-        }
-
-        // Fallback redirect
-        return '/';
-    }
-
 }
