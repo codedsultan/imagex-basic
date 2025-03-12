@@ -9,7 +9,7 @@ export default function VerifyEmail({ status }: { status?: string }) {
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        post(route('user.verification.send'));
+        post(route('verification.send'));
     };
 
     return (

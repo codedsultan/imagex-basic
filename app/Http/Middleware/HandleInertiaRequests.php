@@ -66,6 +66,9 @@ class HandleInertiaRequests extends Middleware
             return 'admin';
         } elseif (strpos($domain, config('app.subdomains.users')) === 0) {
             return 'users';
+        } else
+        {
+            return 'public';
         }
     }
 
@@ -83,7 +86,7 @@ class HandleInertiaRequests extends Middleware
         return match (true) {
             strpos($domain, config('app.subdomains.admin').'.') === 0 => $this->getAdminAuthData($user),
             strpos($domain, config('app.subdomains.users').'.') === 0 => $this->getUserAuthData($user),
-            default => null,
+            default => $this->getUserAuthData($user),
         };
     }
 
@@ -105,6 +108,18 @@ class HandleInertiaRequests extends Middleware
 
 
     private function getUserAuthData(User $user)
+    {
+        return [
+            'user' => [
+                'name' => $user->name,
+                'email' => $user->email,
+                'avatar' => $user->avatar,
+                'timezone' => $user->timezone ?? null,
+            ],
+        ];
+    }
+
+    private function getSassAuthData(User $user)
     {
         return [
             'user' => [

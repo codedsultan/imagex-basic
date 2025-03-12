@@ -26,7 +26,7 @@ export default function UpdateProfileInformation({
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        patch(route('user.profile.update'));
+        patch(route('profile.update'));
     };
 
     return (
@@ -79,7 +79,7 @@ export default function UpdateProfileInformation({
                         <p className="mt-2 text-sm text-gray-800 dark:text-gray-200">
                             Your email address is unverified.
                             <Link
-                                href={route('user.verification.send')}
+                                href={route('verification.send')}
                                 method="post"
                                 as="button"
                                 className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"

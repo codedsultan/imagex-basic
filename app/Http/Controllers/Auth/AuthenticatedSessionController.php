@@ -18,7 +18,20 @@ class AuthenticatedSessionController extends Controller
      */
     public function create()
     {
-        return redirect()->intended(session('login_redirect', '/'));
+        // return redirect()->intended(session('login_redirect', '/'));
+        // dd('hre');
+        return Inertia::render('Auth/Login', [
+            'canResetPassword' => Route::has('password.request'),
+            'status' => session('status'),
+        ]);
+    }
+
+    /**
+     * Display the login view.
+     */
+    public function login()
+    {
+        // dd('hre');
         return Inertia::render('Auth/Login', [
             'canResetPassword' => Route::has('password.request'),
             'status' => session('status'),
@@ -30,6 +43,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+        // dd('here');
         $request->authenticate();
 
         $request->session()->regenerate();
@@ -52,21 +66,22 @@ class AuthenticatedSessionController extends Controller
     }
 
 
-    protected function redirectTo()
-    {
-        $host = request()->getHost();
+    // protected function redirectTo()
+    // {
+    //     $host = request()->getHost();
 
-        // Customize these as needed for your domains.
-        if ($host === 'admin.imagex-basic.test' || $host === 'admin.imagex-basic') {
-            return route('admin.login');
-        }
+    //     // Customize these as needed for your domains.
+    //     if ($host === 'admin.imagex-basic.test' || $host === 'admin.imagex-basic') {
+    //         return route('admin.login');
+    //     } else if ($host === 'users.imagex-basic.test' || $host === 'users.imagex-basic') {
+    //         return route('user.login');
+    //     }
+    //     else {
+    //         return route('auth.login');
+    //     }
 
-        if ($host === 'users.imagex-basic.test' || $host === 'users.imagex-basic') {
-            return route('user.login');
-        }
-
-        // Fallback redirect
-        return '/';
-    }
+    //     // Fallback redirect
+    //     return '/';
+    // }
 
 }

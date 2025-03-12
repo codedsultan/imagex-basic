@@ -28,8 +28,8 @@ export default function Authenticated({
 
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink
-                                    href={route('user.dashboard')}
-                                    active={route().current('user.dashboard')}
+                                    href={route('dashboard')}
+                                    active={route().current('dashboard')}
                                 >
                                     Dashboard
                                 </NavLink>
@@ -65,12 +65,12 @@ export default function Authenticated({
 
                                     <Dropdown.Content>
                                         <Dropdown.Link
-                                            href={route('user.profile.edit')}
+                                            href={route('profile.edit')}
                                         >
                                             Profile
                                         </Dropdown.Link>
                                         <Dropdown.Link
-                                            href={route('user.logout')}
+                                            href={route('logout')}
                                             method="post"
                                             as="button"
                                         >
@@ -132,8 +132,8 @@ export default function Authenticated({
                 >
                     <div className="space-y-1 pb-3 pt-2">
                         <ResponsiveNavLink
-                            href={route('user.dashboard')}
-                            active={route().current('user.dashboard')}
+                            href={route('dashboard')}
+                            active={route().current('dashboard')}
                         >
                             Dashboard
                         </ResponsiveNavLink>
@@ -150,12 +150,12 @@ export default function Authenticated({
                         </div>
 
                         <div className="mt-3 space-y-1">
-                            <ResponsiveNavLink href={route('user.profile.edit')}>
+                            <ResponsiveNavLink href={route('profile.edit')}>
                                 Profile
                             </ResponsiveNavLink>
                             <ResponsiveNavLink
                                 method="post"
-                                href={route('user.logout')}
+                                href={route('logout')}
                                 as="button"
                             >
                                 Log Out

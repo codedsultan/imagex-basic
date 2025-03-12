@@ -16,9 +16,9 @@ use Inertia\Inertia;
 
 
 
-Route::get('/', function () {
-    return Inertia::render('LandingPage'); // Ensure you have a LandingPage component
-})->name('user.landing');
+// Route::get('/', function () {
+//     return Inertia::render('LandingPage'); // Ensure you have a LandingPage component
+// })->name('user.landing');
 Route::prefix('user')->name('user.')->group(function () {
     Route::get('/', function () {
         return Inertia::render('LandingPage');
