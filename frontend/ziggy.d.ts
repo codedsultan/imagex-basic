@@ -31,6 +31,54 @@ declare module 'ziggy-js' {
     "password.confirm": [],
     "password.update": [],
     "logout": [],
+    "designs.index": [],
+    "designs.create": [],
+    "designs.store": [],
+    "designs.edit": [
+        {
+            "name": "design",
+            "required": true
+        }
+    ],
+    "designs.update": [
+        {
+            "name": "design",
+            "required": true
+        }
+    ],
+    "designs.destroy": [
+        {
+            "name": "design",
+            "required": true
+        }
+    ],
+    "products.index": [],
+    "products.create": [],
+    "products.store": [],
+    "products.show": [
+        {
+            "name": "product",
+            "required": true
+        }
+    ],
+    "products.edit": [
+        {
+            "name": "product",
+            "required": true
+        }
+    ],
+    "products.update": [
+        {
+            "name": "product",
+            "required": true
+        }
+    ],
+    "products.destroy": [
+        {
+            "name": "product",
+            "required": true
+        }
+    ],
     "user.landing": [],
     "user.dashboard": [],
     "user.profile.edit": [],
