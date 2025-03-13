@@ -14,6 +14,7 @@
     <!-- Scripts -->
     @if(str_contains(request()->getHost(), config('app.subdomains.saas') .'.'))
         @routes('saas')
+        {!! Vite::reactRefresh() !!} <!-- Must come FIRST -->
         {{-- {!! Vite::reactRefresh() !!} --}}
         {{
             // Vite::reactRefresh(),
@@ -21,12 +22,21 @@
                 ->useBuildDirectory('build/saas')
                 ->useManifestFilename('manifest.json')
                 ->withEntryPoints(['src/app.tsx'])
+                // ->createAssetPathsUsing(function (string $path, ?bool $secure) {
+                //     return env('APP_ENV') === 'local'
+                //         ? "http:///saas.imagex-basic.test:5177/{$path}"  // Dev server URL
+                //         : asset("build/user/{$path}");     // Production path
+                // })
+
                 ->createAssetPathsUsing(function (string $path, ?bool $secure) {
                     // Generate asset paths using the secure user frontend URL.
                     // Adjust the URL if you serve assets from a CDN or different subdomain.
-                    return "https://saas.imagex-basic.test/{$path}";
+                    return "http://saas.imagex-basic.test:5177/{$path}";
                 })
         }}
+
+        
+
         @viteReactRefresh
 
     @elseif(str_contains(request()->getHost(), config('app.subdomains.admin') .'.'))
