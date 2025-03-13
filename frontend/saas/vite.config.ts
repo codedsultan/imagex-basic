@@ -64,11 +64,11 @@ export default defineConfig({
     //   devServerUrl: 'https://imagex-basic.test:5176',
       asset_url: process.env.ASSET_URL || `https://localhost:${process.env.USER_VITE_PORT || 5177}/build/user`,
     } as any) as PluginOption,
-    // react(),
-    react({ 
-        jsxRuntime: 'automatic', // Required for React Refresh
-        // fastRefresh: true 
-      }),
+    react(),
+    // react({ 
+    //     jsxRuntime: 'automatic', // Required for React Refresh
+    //     // fastRefresh: true 
+    //   }),
     tsconfigPaths(),
   ] as PluginOption[],
   resolve: {
