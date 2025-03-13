@@ -81,6 +81,11 @@ Route::domain($adminDomain)->group(function () {
 //     require $moduleRouteFile;
 // }
 
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+foreach (glob(app_path('Modules/*/Routes/web.php')) as $moduleRouteFile) {
+    require $moduleRouteFile;
+}

@@ -12,7 +12,14 @@ class DesignServiceProvider extends ServiceProvider
         $this->app->bind(
             \App\Modules\Design\Interfaces\Repositories\DesignRepositoryInterface::class,
             \App\Modules\Design\Repositories\EloquentDesignRepository::class
+
         );
+
+        $this->app->bind(
+            \App\Modules\Design\Interfaces\Services\DesignServiceInterface::class,
+            \App\Modules\Design\Services\DesignService::class
+        );
+
         // $this->app->bind(UserRepositoryInterface::class, EloquentUserRepository::class);
         // $this->app->bind(UserServiceInterface::class, UserService::class);
     }
