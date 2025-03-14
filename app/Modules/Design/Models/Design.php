@@ -23,7 +23,8 @@ class Design extends Model implements HasMedia
         'slug',
         'image_path',
         'design_image',
-        'design_data'
+        'design_data',
+        'is_ai_generated',
     ];
 
     protected $casts = [
@@ -56,13 +57,21 @@ class Design extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
+        // Collection for the source image (uploaded by the user)
+        $this->addMediaCollection('source_images')
+             ->singleFile();
+
         $this
             ->addMediaCollection($this->collectionName)
             // ->useFallbackUrl($fallbackImageUrl)
             ->singleFile();
-        
+
+        // Collection for the generated design image (output from AI or processing)
+        $this->addMediaCollection('generated_designs')
+             ->singleFile();
+
     }
-    
+
 
     public function getFullImageUrlAttribute(): string
     {
@@ -85,7 +94,7 @@ class Design extends Model implements HasMedia
                 ->fit(Fit::Contain, 300, 300) // Fit mode PAD resizes while preserving aspect ratio and pads extra space.
                 ->background('#ffffff')  // Set the background color for the padding.
                 ->quality(75)
-                ->performOnCollections('design_images');
+                ->performOnCollections(['generated_designs', 'design_images']);
         } else {
             $this->addMediaConversion('thumbnail')
                 ->width(300)
@@ -93,11 +102,11 @@ class Design extends Model implements HasMedia
                 ->fit(Fit::Contain, 300, 300) // Fit mode PAD resizes while preserving aspect ratio and pads extra space.
                 ->background('#ffffff')  // Set the background color for the padding.
                 ->quality(75)
-                ->performOnCollections('design_images')
+                ->performOnCollections(['generated_designs', 'design_images'])
                 ->nonQueued();
         }
-        
-       
+
+
     }
 
     /**
@@ -109,5 +118,27 @@ class Design extends Model implements HasMedia
     {
         return $this->getFirstMediaUrl('design_images', 'thumbnail');
     }
+
+
+    /**
+     * Get the URL for the thumbnail conversion of the generated design.
+     *
+     * @return string
+     */
+    public function getGeneratedThumbnailAttribute(): string
+    {
+        return $this->getFirstMediaUrl('generated_designs', 'thumbnail');
+    }
+
+    /**
+     * Get the URL for the source image.
+     *
+     * @return string
+     */
+    public function getSourceImageUrlAttribute(): string
+    {
+        return $this->getFirstMediaUrl('source_images');
+    }
+
 
 }

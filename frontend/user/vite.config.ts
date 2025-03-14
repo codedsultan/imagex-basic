@@ -19,7 +19,7 @@ export default defineConfig({
     'process.env.APP_URL': JSON.stringify(process.env.APP_URL),
     'process.env.ASSET_URL': JSON.stringify(process.env.ASSET_URL),
   },
-  
+
   server: {
     // https: {
     //     key: fs.readFileSync(`/Users/tedbree-ayobami/Library/Application Support/Herd/config/valet/Certificates/${host}.key`),
@@ -27,14 +27,14 @@ export default defineConfig({
     // },
     // https:true,
     // https: {
-        
+
     // },
-    // cors: {  
-    //     origin: [ 
-    //         // Supports: SCHEME://DOMAIN.laravel[:PORT] 
-    //         /^https?:\/\/.*\.laravel(:\d+)?$/, 
-    //     ], 
-    // }, 
+    // cors: {
+    //     origin: [
+    //         // Supports: SCHEME://DOMAIN.laravel[:PORT]
+    //         /^https?:\/\/.*\.laravel(:\d+)?$/,
+    //     ],
+    // },
     // https: {} as any,
     port: Number(process.env.USER_VITE_PORT) || 5176,
     cors: true,
@@ -48,7 +48,7 @@ export default defineConfig({
   },
   plugins: [
     laravel({
-    //   detectTls: 'imagex-basic.test', 
+    //   detectTls: 'imagex-basic.test',
     //   enforceHttps: true,
       input: 'src/app.tsx', // Entry file relative to frontend/user-frontend folder
       refresh: true,
@@ -65,6 +65,10 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, './src'),
       'ziggy-js': path.resolve(__dirname, '../../vendor/tightenco/ziggy'),
+      '@uppy/drag-drop': path.resolve(__dirname, 'node_modules/@uppy/drag-drop'),
+      '@uppy/dashboard': path.resolve(__dirname, 'node_modules/@uppy/dashboard'),
+      '@uppy/progress-bar': path.resolve(__dirname, 'node_modules/@uppy/progress-bar'),
+      '@uppy/file-input': path.resolve(__dirname, 'node_modules/@uppy/file-input'),
     },
     extensions: [".js", ".jsx", ".json", ".vue", ".ts", ".tsx", ".mjs", ".mts"],
   },
@@ -83,5 +87,8 @@ export default defineConfig({
         },
       },
     },
+  },
+  optimizeDeps: {
+    include: ['@uppy/drag-drop', '@uppy/dashboard', '@uppy/progress-bar', '@uppy/file-input'],
   },
 });

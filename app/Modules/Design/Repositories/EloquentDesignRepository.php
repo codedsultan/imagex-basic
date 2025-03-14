@@ -19,7 +19,7 @@ class EloquentDesignRepository implements DesignRepositoryInterface
         return Design::with(['media', 'categories'])->findOrFail($designId);
     }
 
-    public function createDesign(array $attributes)
+    public function createDesign(array $attributes) : Design
     {
         return Design::create($attributes);
     }
@@ -41,4 +41,15 @@ class EloquentDesignRepository implements DesignRepositoryInterface
         $design = Design::findOrFail($designId);
         return $design->addMedia($file)->toMediaCollection('design_files');
     }
+
+    public function deleteMedia(Design $design, int $mediaId): bool
+    {
+        $media = $design->getMedia($design->collectionName)->firstWhere('id', $mediaId);
+        if ($media) {
+            $media->delete();
+            return true;
+        }
+        return false;
+    }
+
 }
