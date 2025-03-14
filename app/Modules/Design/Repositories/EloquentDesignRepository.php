@@ -36,15 +36,15 @@ class EloquentDesignRepository implements DesignRepositoryInterface
         return Design::destroy($designId);
     }
 
-    public function addMediaToDesign(string $designId, $file)
+    public function addMediaToDesign(string $designId, $file, $collectionName)
     {
         $design = Design::findOrFail($designId);
-        return $design->addMedia($file)->toMediaCollection('design_files');
+        return $design->addMedia($file)->toMediaCollection($collectionName);
     }
 
-    public function deleteMedia(Design $design, int $mediaId): bool
+    public function deleteMedia(Design $design, int $mediaId, $collectionName): bool
     {
-        $media = $design->getMedia($design->collectionName)->firstWhere('id', $mediaId);
+        $media = $design->getMedia($collectionName)->firstWhere('id', $mediaId);
         if ($media) {
             $media->delete();
             return true;

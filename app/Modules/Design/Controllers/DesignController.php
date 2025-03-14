@@ -37,6 +37,7 @@ class DesignController extends Controller
             'file' => 'required|file|mimes:png,jpg,svg|max:2048'
         ]);
 
+        // dd($validated);
         $this->designService->createDesign(
             [
                 'title' => $validated['title'],
@@ -46,7 +47,7 @@ class DesignController extends Controller
             $request->file('file')
         );
 
-        return redirect()->route('designs.index');
+        return redirect()->route('designs');
     }
 
 

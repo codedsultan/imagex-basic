@@ -17,10 +17,11 @@ interface CreateDesignProps {
 
 // Extend the form data with extra fields for scenario 2 (Text Design)
 interface DesignFormData {
-    name: string;
+    title: string;
     description: string;
     design_data: string;
-    thumbnail: File | string | null;
+    // thumbnail: File | string | null;
+    file: File | string | null;
     ai_prompt: string;
     style_color: string;
     style_shape: string;
@@ -31,10 +32,10 @@ interface DesignFormData {
 export default function CreateDesign({ auth }: CreateDesignProps) {
   const { toast } = useToast();
   const { data, setData, post, processing, errors } = useForm<DesignFormData>({
-    name: "",
+    title: "",
     description: "",
     design_data: "",
-    thumbnail: null,
+    file: null,
     ai_prompt: "",
     style_color: "#000000", // default color (black)
     style_shape: "",
@@ -109,7 +110,7 @@ export default function CreateDesign({ auth }: CreateDesignProps) {
         fileData.uploadURL ||
         "";
       if (fileUrl) {
-        setData("thumbnail", fileUrl);
+        setData("file", fileUrl);
         setPreviewImage(fileUrl);
         // Automatically trigger AI generation for image-to-design.
         generateAIDesign("image");
@@ -127,7 +128,7 @@ export default function CreateDesign({ auth }: CreateDesignProps) {
           body: JSON.stringify({ fileUrl: data.thumbnail }),
         });
         if (response.ok) {
-          setData("thumbnail", null);
+          setData("file", null);
           setPreviewImage(null);
           toast({
             title: "File Deleted",
@@ -149,7 +150,7 @@ export default function CreateDesign({ auth }: CreateDesignProps) {
       }
     } else {
       // For files not yet uploaded, just clear the preview.
-      setData("thumbnail", null);
+      setData("file", null);
       setPreviewImage(null);
     }
   };
@@ -182,11 +183,11 @@ export default function CreateDesign({ auth }: CreateDesignProps) {
                         </label>
                         <Input
                           id="designName"
-                          value={data.name}
-                          onChange={(e) => setData("name", e.target.value)}
+                          value={data.title}
+                          onChange={(e) => setData("title", e.target.value)}
                           required
                         />
-                        {errors.name && <p className="text-sm text-red-500">{errors.name}</p>}
+                        {errors.title && <p className="text-sm text-red-500">{errors.title}</p>}
                       </div>
                       <div className="grid gap-2">
                         <label htmlFor="description" className="block text-sm font-medium">
@@ -203,7 +204,7 @@ export default function CreateDesign({ auth }: CreateDesignProps) {
                         <label className="block text-sm font-medium">Upload Design</label>
                         <FileDropzone
                           onDrop={(files) => {
-                            setData("thumbnail", files[0]);
+                            setData("file", files[0]);
                             setPreviewImage(URL.createObjectURL(files[0]));
                           }}
                         />
@@ -233,11 +234,11 @@ export default function CreateDesign({ auth }: CreateDesignProps) {
                         </label>
                         <Input
                           id="designNameText"
-                          value={data.name}
-                          onChange={(e) => setData("name", e.target.value)}
+                          value={data.title}
+                          onChange={(e) => setData("title", e.target.value)}
                           required
                         />
-                        {errors.name && <p className="text-sm text-red-500">{errors.name}</p>}
+                        {errors.title && <p className="text-sm text-red-500">{errors.title}</p>}
                       </div>
                       <div className="grid gap-2">
                         <label htmlFor="descriptionText" className="block text-sm font-medium">

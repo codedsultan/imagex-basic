@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, usePage } from '@inertiajs/react';
 import { PropsWithChildren, ReactNode } from 'react';
 import ApplicationLogo from '@/components/ApplicationLogo';
+import { Toaster } from "@/components/ui/toaster";
 
 // Import shadcn/ui components
 import {
@@ -160,7 +161,13 @@ export default function Authenticated({
         </header>
       )}
 
-      <main>{children}</main>
+      <main>
+        <>
+            {children}
+            <Toaster />
+        </>
+      </main>
+
     </div>
   );
 }
