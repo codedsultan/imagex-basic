@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->foreignId('user_id')->constrained();
             $table->boolean('is_public')->default(false);
+            $table->boolean('is_ai_generated')->default(false);
             $table->string('image_path')->nullable();
             $table->string('design_image')->nullable();
             $table->json('design_data')->nullable();

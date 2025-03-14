@@ -31,9 +31,16 @@ declare module 'ziggy-js' {
     "password.confirm": [],
     "password.update": [],
     "logout": [],
-    "designs.index": [],
+    "designs": [],
     "designs.create": [],
     "designs.store": [],
+    "designs.show": [
+        {
+            "name": "design",
+            "required": true,
+            "binding": "id"
+        }
+    ],
     "designs.edit": [
         {
             "name": "design",

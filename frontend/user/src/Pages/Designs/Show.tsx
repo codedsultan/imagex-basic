@@ -243,6 +243,7 @@ export default function DesignShow({ auth, design }: DesignShowProps) {
                       <div>
                         <h4 className="text-sm font-medium text-gray-500">Preview URL</h4>
                         <p className="mt-1 flex items-center text-sm">
+                        {design.preview_url}
                           <a href={design.preview_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
                             View preview
                           </a>
