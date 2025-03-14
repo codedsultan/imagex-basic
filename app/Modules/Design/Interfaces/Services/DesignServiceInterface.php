@@ -26,6 +26,6 @@ interface DesignServiceInterface
     /**
      * Delete a media file from a design.
      */
-    public function deleteDesignMedia(int $designId, int $mediaId): bool;
+    public function deleteDesignMedia(int $designId, int $mediaId,string $collectionName): bool;
 
 }

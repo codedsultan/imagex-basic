@@ -41,7 +41,7 @@ export default function DesignsIndex({ auth, designs }: DesignsIndexProps) {
                         {designs.map(design => (
                         <Link key={design.id} href={route('designs.show', design.id)} className="block">
                             <Card className="overflow-hidden transition-all hover:scale-[1.02] hover:shadow-lg">
-                            <div className="w-full h-48  flex items-center justify-center bg-gray-50 dark:bg-gray-800">
+                            <div className="p-2 w-full h-48  flex items-center justify-center bg-gray-50 dark:bg-gray-800">
                                 {design.thumbnail ? (
                                     <img
                                         src={design.thumbnail}

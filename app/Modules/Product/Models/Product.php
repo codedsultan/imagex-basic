@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Traits\HasSlug;
 class Product extends Model implements HasMedia
 {
     use InteractsWithMedia;
     use HasFactory;
+    use HasSlug;
 
     protected $fillable = [
         'name',

@@ -23,9 +23,9 @@ class DesignService implements DesignServiceInterface
     public function createDesign(array $data, ?UploadedFile $file = null): Design
     {
         $design = $this->designRepository->createDesign($data);
-
+        $collectionName = 'design_images';
         if ($file) {
-            $this->designRepository->addMediaToDesign($design->id, $file);
+            $this->designRepository->addMediaToDesign($design->id, $file,$collectionName);
         }
 
         return $design;
@@ -56,9 +56,9 @@ class DesignService implements DesignServiceInterface
     public function updateDesign(string $designId, array $data, $file = null)
     {
         $design = $this->designRepository->updateDesign($designId, $data);
-
+        $collectionName = 'design_images';
         if ($file) {
-            $this->designRepository->addMediaToDesign($designId, $file);
+            $this->designRepository->addMediaToDesign($designId, $file,$collectionName);
         }
 
         return $design;
@@ -110,12 +110,13 @@ class DesignService implements DesignServiceInterface
         throw new \Exception("AI design generation failed.");
     }
 
-    public function deleteDesignMedia(int $designId, int $mediaId): bool
+    public function deleteDesignMedia(int $designId, int $mediaId,string $collectionName): bool
     {
         $design = $this->designRepository->getDesignById($designId);
+
         if (!$design) {
             return false;
         }
-        return $this->designRepository->deleteMedia($design, $mediaId);
+        return $this->designRepository->deleteMedia($design, $mediaId,$collectionName);
     }
 }

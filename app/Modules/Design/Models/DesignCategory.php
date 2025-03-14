@@ -6,10 +6,11 @@ use Database\Factories\DesignCategoryFactory;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Traits\HasSlug;
 class DesignCategory extends Model
 {
     use HasFactory;
+    use HasSlug;
 
     protected $fillable = [
         'name',

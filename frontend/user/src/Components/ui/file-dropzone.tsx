@@ -40,7 +40,7 @@ export function FileDropzone({
       <input {...getInputProps()} />
       <div className="flex flex-col items-center gap-2">
         <div className="flex flex-col items-center gap-1">
-          <Button variant="ghost" size="sm" className="text-muted-foreground">
+          <Button variant="ghost" size="sm" type="button" className="text-muted-foreground">
             Click to upload or drag and drop
           </Button>
           <p className="text-xs text-muted-foreground">

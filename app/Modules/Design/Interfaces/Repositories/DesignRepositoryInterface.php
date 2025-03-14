@@ -11,11 +11,11 @@ interface DesignRepositoryInterface
     // public function create(array $data)
     public function updateDesign(string $designId, array $attributes);
     public function deleteDesign(string $designId);
-    public function addMediaToDesign(string $designId, $file);
+    public function addMediaToDesign(string $designId, $file ,string $collectionName);
 
     /**
      * Delete a media file from a design.
      */
-    public function deleteMedia(Design $design, int $mediaId): bool;
+    public function deleteMedia(Design $design, int $mediaId,string $collectionName): bool;
 
 }

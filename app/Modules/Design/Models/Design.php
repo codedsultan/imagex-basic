@@ -11,10 +11,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Image\Enums\Fit;
 use Database\Factories\DesignFactory;
+use App\Traits\HasSlug;
 class Design extends Model implements HasMedia
 {
     use InteractsWithMedia;
     use HasFactory;
+    use HasSlug;
+
     protected $fillable = [
         'title',
         'description',
