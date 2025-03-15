@@ -23,6 +23,7 @@ class Product extends Model implements HasMedia
         'slug'
     ];
 
+    protected $slugField = 'name';
     /**
      * Create a new factory instance for the model.
      *

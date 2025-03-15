@@ -140,7 +140,7 @@ jobs:
             cd ../docker
             docker-compose stop imagexbasic
             docker-compose rm -f imagexbasic
-            docker-compose build imagexbasic
+            # docker-compose build imagexbasic
             docker-compose up -d imagexmysql redis imagexbasic
             docker-compose exec -T imagexbasic composer install
             docker-compose exec -T imagexbasic cd frontend/user && npm install && npm run build && rm -rf node_modules && cd ../../
