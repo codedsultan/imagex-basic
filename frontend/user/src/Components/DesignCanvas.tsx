@@ -12,7 +12,6 @@ import {
   import { useEffect, useRef, useState } from 'react';
   import { Button } from '@/components/ui/button';
   import { Skeleton } from '@/components/ui/skeleton';
-  import { StaticCanvas, FabricText } from 'fabric'
 //   import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
   import { Text, Square, Circle as CircleIcon, Triangle as TriangleIcon, Trash2, Loader2 } from 'lucide-react';
 

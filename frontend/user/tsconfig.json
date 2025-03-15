@@ -12,9 +12,10 @@
         "forceConsistentCasingInFileNames": true,
         "skipLibCheck": true,
         "noEmit": true,
+        "baseUrl": ".",
         "paths": {
-            "@/*": ["./src/*"],
-            "ziggy-js": ["./vendor/tightenco/ziggy"]
+            "@/*": ["src/*"],
+            "ziggy-js": ["vendor/tightenco/ziggy"]
         }
     },
     "include": ["src"]
