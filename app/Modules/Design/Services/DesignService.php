@@ -7,6 +7,8 @@ use App\Modules\Design\Interfaces\Services\DesignServiceInterface;
 use App\Modules\Design\Models\Design;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 
 class DesignService implements DesignServiceInterface
@@ -119,4 +121,16 @@ class DesignService implements DesignServiceInterface
         }
         return $this->designRepository->deleteMedia($design, $mediaId,$collectionName);
     }
+
+    public function storeBase64Image(string $base64): string
+    {
+        $image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $base64));
+        $fileName = Str::uuid() . '.png';
+        $path = "temp/{$fileName}";
+
+        Storage::disk('public')->put($path, $image);
+
+        return Storage::disk('public')->path($path);
+    }
+
 }
