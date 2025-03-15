@@ -28,7 +28,7 @@ ENV HEALTHCHECK_PATH="/up"
 
 USER root
 # Copy the app files...
-COPY --chown=www-data:www-data . /var/www/html/imagexbasic
+# COPY --chown=www-data:www-data . /var/www/html/imagexbasic
 WORKDIR /var/www/html/imagexbasic
 
 USER www-data
