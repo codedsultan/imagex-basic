@@ -143,5 +143,15 @@ class Design extends Model implements HasMedia
         return $this->getFirstMediaUrl('source_images');
     }
 
+    public function generateThumbnail(): void
+    {
+        $tempPath = tempnam(sys_get_temp_dir(), 'design_');
+        file_put_contents($tempPath, base64_decode($this->design_data['thumbnail']));
+
+        $this->addMedia($tempPath)
+            ->usingFileName('thumbnail.png')
+            ->toMediaCollection('design_images');
+    }
+
 
 }
