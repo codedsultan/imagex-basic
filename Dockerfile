@@ -9,7 +9,7 @@ RUN install-php-extensions exif
 # Install JavaScript dependencies
 ARG NODE_VERSION=20.18.0
 ENV PATH=/usr/local/node/bin:$PATH
-RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz -C /tmp/ && \
+RUN curl -sLS https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz -C /tmp/ && \
     /tmp/node-build-master/bin/node-build "${NODE_VERSION}" /usr/local/node && \
     corepack enable && \
     rm -rf /tmp/node-build-master
@@ -25,11 +25,12 @@ ENV PHP_OPCACHE_ENABLE="1"
 ENV HEALTHCHECK_PATH="/up"
 ENV APP_BASE_DIR="/var/www/html/imagexbasic"
 
-
-
+# Create and set proper working directory with correct permissions
 USER root
-# Copy the app files...
-# COPY --chown=www-data:www-data . /var/www/html/imagexbasic
-# WORKDIR /var/www/html/imagexbasic
+RUN mkdir -p /var/www/html/imagexbasic && chown www-data:www-data /var/www/html/imagexbasic
+WORKDIR /var/www/html/imagexbasic
+
+# Copy the app files with the correct command
+# COPY --chown=www-data:www-data . .
 
 USER www-data
