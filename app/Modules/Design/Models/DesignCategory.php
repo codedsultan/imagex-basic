@@ -18,6 +18,7 @@ class DesignCategory extends Model
         'description',
     ];
 
+    protected $slugField = 'name';
     /**
      * Create a new factory instance for the model.
      *
