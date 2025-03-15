@@ -25,19 +25,26 @@ jobs:
         run: cp .env.example .env
 
       - name: Generate key
-        run: php artisan key:generate
+        run: php artisan key:generate --force
 
       # - name: Execute tests
       #   run: php artisan test
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'  # Adjust as needed
+          cache: 'npm'
 
       - name: Build React Frontend
         working-directory: frontend/user
+        if: hashFiles('frontend/user/package.json') != ''
         run: |
           npm ci
           npm run build
 
       - name: Build Vue Frontend
         working-directory: frontend/admin
+        if: hashFiles('frontend/admin/package.json') != ''
         run: |
           npm ci
           npm run build
