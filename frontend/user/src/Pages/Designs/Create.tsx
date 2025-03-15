@@ -348,7 +348,7 @@ export default function CreateDesign({ auth }: CreateDesignProps) {
                           <option value="triangle">Triangle</option>
                         </select>
                       </div>
-                      <div className="grid gap-2">
+                      {/* <div className="grid gap-2">
                         <label htmlFor="styleShapeSize" className="block text-sm font-medium">
                           Shape Size (px)
                         </label>
@@ -359,8 +359,8 @@ export default function CreateDesign({ auth }: CreateDesignProps) {
                           onChange={(e) => setData("style_shape_size", parseInt(e.target.value, 10))}
                           min={50}
                         />
-                      </div>
-                      <div className="grid gap-2">
+                      </div> */}
+                      {/* <div className="grid gap-2">
                         <label htmlFor="styleShapeColor" className="block text-sm font-medium">
                           Shape Color
                         </label>
@@ -370,7 +370,7 @@ export default function CreateDesign({ auth }: CreateDesignProps) {
                           value={data.style_shape_color}
                           onChange={(e) => setData("style_shape_color", e.target.value)}
                         />
-                      </div>
+                      </div> */}
                       <div className="grid gap-2">
                         <label htmlFor="styleFont" className="block text-sm font-medium">
                           Font
