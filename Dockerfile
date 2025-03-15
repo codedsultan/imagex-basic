@@ -19,16 +19,17 @@ USER www-data
 
 FROM base
 
-# ENV SSL_MODE="off"
+ENV SSL_MODE="off"
 # ENV AUTORUN_ENABLED="true"
 ENV PHP_OPCACHE_ENABLE="1"
 ENV HEALTHCHECK_PATH="/up"
+ENV APP_BASE_DIR="/var/www/html/imagexbasic"
 
 
 
 USER root
 # Copy the app files...
 # COPY --chown=www-data:www-data . /var/www/html/imagexbasic
-WORKDIR /var/www/html/imagexbasic
+# WORKDIR /var/www/html/imagexbasic
 
 USER www-data
