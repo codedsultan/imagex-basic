@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "scripts": {
         "routes:generate": "cd ../../ && php artisan ziggy:generate --types frontend/ziggy.ts",
-        "build": "npm run routes:generate && tsc && vite build",
+        "build": "npm run routes:generate && tsc -p tsconfig.json  && vite build",
         "dev": "npm run routes:generate && vite --port 5176"
     },
     "type": "module",
