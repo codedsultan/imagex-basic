@@ -35,7 +35,7 @@
                 })
         }}
 
-        
+
 
         @viteReactRefresh
 
@@ -50,7 +50,7 @@
                     return "https://admin.imagex-basic.test/{$path}";
                 })
         }}
-        
+
         {{-- @vite(['src/app.ts','hot-admin']) --}}
         {{-- @vite('src/app.ts', 'build/admin', 'hot-admin') --}}
         {{-- @env('local')
@@ -70,7 +70,7 @@
             // Vite::reactRefresh(),
             Vite::useHotFile(public_path('hot-user'))
                 ->useBuildDirectory('build/user')
-                ->useManifestFilename('manifest.json')
+                ->useManifestFilename('user-manifest.json')
                 ->withEntryPoints(['src/app.tsx'])
                 ->createAssetPathsUsing(function (string $path, ?bool $secure) {
                     // Generate asset paths using the secure user frontend URL.
