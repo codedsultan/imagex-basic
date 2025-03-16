@@ -1,14 +1,14 @@
 <?php
 
 return [
-    'paths' => ['sanctum/csrf-cookie'], 
+    'paths' =>  ['sanctum/csrf-cookie','api/*', 'storage/*', 'media/*'],
 
     'allowed_origins' => [
         // '*',
         env('USER_CLIENT_URL', 'https://users.imagex-basic.test'),
         env('ADMIN_CLIENT_URL' , 'https://admin.imagex-basic.test'),
         env('APP_URL' , 'https://imagex-basic.test'),
-        
+
         'http://127.0.0.1:3000',
     ],
 
@@ -18,7 +18,7 @@ return [
 
     'allowed_headers' => ['*'],
 
-    'exposed_headers' => [],
+    'exposed_headers' => ['Content-Disposition'],
 
     'max_age' => 0,
 

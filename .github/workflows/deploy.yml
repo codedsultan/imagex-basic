@@ -145,8 +145,9 @@ jobs:
             docker-compose exec -T imagexbasic composer install
             docker-compose exec -T imagexbasic cd frontend/user && npm install && npm run build && rm -rf node_modules && cd ../../
             # docker-compose exec -T imagexbasic cd frontend/admin && npm install && npm run build && rm -rf node_modules && cd ../../
-            docker-compose exec -T imagexbasic php artisan key:genrate
+            # docker-compose exec -T imagexbasic php artisan key:genrate
             docker-compose exec -T imagexbasic php artisan migrate --force
+            # docker-compose exec -T imagexbasic php php artisan storage:link
 
 
 
