@@ -13,11 +13,11 @@ const __dirname = path.dirname(__filename);
 
 // Load environment variables from the Laravel root .env file
 dotenv.config({ path: path.resolve(__dirname, './.env') });
-const host = 'imagex-basic.test';
+const host = process.env.APP_DOMAIN || 'localhost';
 export default defineConfig({
   define: {
     'process.env.APP_URL': JSON.stringify(process.env.APP_URL),
-    'process.env.ASSET_URL': JSON.stringify(process.env.ASSET_URL),
+    // 'process.env.ASSET_URL': JSON.stringify(process.env.ASSET_URL),
   },
 
   server: {
