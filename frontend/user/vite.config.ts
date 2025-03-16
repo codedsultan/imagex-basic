@@ -21,21 +21,6 @@ export default defineConfig({
   },
 
   server: {
-    // https: {
-    //     key: fs.readFileSync(`/Users/tedbree-ayobami/Library/Application Support/Herd/config/valet/Certificates/${host}.key`),
-    //     cert: fs.readFileSync(`/Users/tedbree-ayobami/Library/Application Support/Herd/config/valet/Certificates/${host}.crt`),
-    // },
-    // https:true,
-    // https: {
-
-    // },
-    // cors: {
-    //     origin: [
-    //         // Supports: SCHEME://DOMAIN.laravel[:PORT]
-    //         /^https?:\/\/.*\.laravel(:\d+)?$/,
-    //     ],
-    // },
-    // https: {} as any,
     port: Number(process.env.USER_VITE_PORT) || 5176,
     cors: true,
     host: host,
@@ -46,17 +31,15 @@ export default defineConfig({
       protocol: 'ws',
     },
   },
+
   plugins: [
     laravel({
     //   detectTls: 'imagex-basic.test',
     //   enforceHttps: true,
       input: 'src/app.tsx', // Entry file relative to frontend/user-frontend folder
       refresh: true,
-      publicDirectory: '../../public', // Laravel's public directory
-      buildDirectory: 'build', // Subdirectory in public where assets will go
-      hotFile: '../../public/hot-user', // Location of the hot file
-    //   devServerUrl: 'https://imagex-basic.test:5176',
-      asset_url: process.env.ASSET_URL || `https://localhost:${process.env.USER_VITE_PORT || 5176}/build/user`,
+      buildDirectory: 'build/user', // ✅ Places assets inside `public/build/user`
+      hotFile: path.resolve(__dirname, '../../public/hot-user'), // Ensures hotfile is correctly located
     } as any) as PluginOption,
     react(),
     tsconfigPaths(),
@@ -75,7 +58,7 @@ export default defineConfig({
   build: {
     outDir: path.resolve(__dirname, '../../public/build/user'),
     emptyOutDir: true,
-    manifest: true,
+    manifest: 'user-manifest.json',
     minify: true,
     sourcemap: false,
     rollupOptions: {
