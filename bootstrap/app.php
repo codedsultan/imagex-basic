@@ -12,7 +12,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->trustHosts(at: ['imagex-basic.test']);
+        $middleware->trustHosts(at: [env('APP_URL', 'http://localhost')]);
 
         $middleware->trustProxies(headers: Request::HEADER_X_FORWARDED_FOR |
             Request::HEADER_X_FORWARDED_HOST |
@@ -20,7 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
             Request::HEADER_X_FORWARDED_PROTO |
             Request::HEADER_X_FORWARDED_AWS_ELB
         );
-       
+
         $middleware->web(append: [
             \App\Http\Middleware\HandleInertiaRequests::class,
             // \App\Http\Middleware\SetLoginRedirect::class,

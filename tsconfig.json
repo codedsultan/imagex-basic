@@ -16,5 +16,6 @@
             "ziggy-js": ["./vendor/tightenco/ziggy"]
         }
     },
-    "include": ["resources/js/**/*.ts", "resources/js/**/*.tsx", "resources/js/**/*.d.ts , frontend/admin/src/**/*.ts", "frontend/admin/src/**/*.tsx", "frontend/admin/src/**/*.d.ts", "frontend/user/src/**/*.ts", "frontend/user/src/**/*.tsx", "frontend/user/src/**/*.d.ts"],
+    "include": ["resources/js/**/*.ts", "resources/js/**/*.tsx", "resources/js/**/*.d.ts"]
+    // "include": ["resources/js/**/*.ts", "resources/js/**/*.tsx", "resources/js/**/*.d.ts , frontend/admin/src/**/*.ts", "frontend/admin/src/**/*.tsx", "frontend/admin/src/**/*.d.ts", "frontend/user/src/**/*.ts", "frontend/user/src/**/*.tsx", "frontend/user/src/**/*.d.ts"],
 }
