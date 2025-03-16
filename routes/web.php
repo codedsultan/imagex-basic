@@ -49,18 +49,18 @@ Route::domain($saasDomain)->group(function () {
     }
 });
 Route::get('/', function (Request $request) {
-    
+
         $domain = $request->getHost();
 
         if (strpos($domain, config('app.subdomains.admin')) === 0) {
-            return Inertia::render('Auth/Login'); 
+            return Inertia::render('Auth/Login');
         } elseif (strpos($domain, config('app.subdomains.users')) === 0) {
-            return Inertia::render('LandingPage'); 
+            return Inertia::render('LandingPage');
         } elseif (strpos($domain, config('app.subdomains.saas')) === 0) {
-            return Inertia::render('LandingPage'); 
-        }  
+            return Inertia::render('LandingPage');
+        }
         else {
-            return Inertia::render('LandingPage'); 
+            return Inertia::render('LandingPage');
         }
      // Ensure you have a LandingPage component
 
@@ -89,3 +89,6 @@ Route::get('/dashboard', function () {
 foreach (glob(app_path('Modules/*/Routes/web.php')) as $moduleRouteFile) {
     require $moduleRouteFile;
 }
+
+
+

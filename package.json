@@ -3,8 +3,7 @@
     "type": "module",
     "scripts": {
         "routes:generate": "php artisan ziggy:generate --types frontend/ziggy.ts",
-        "build": "npm run routes:generate && tsc && vite build --mode production --base=/build/user/",
-        "build:admin": "npm run routes:generate && tsc && vite build --mode production --base=/build/admin/",
+        "build": "vite build",
         "dev": "npm run routes:generate && vite",
         "lint": "eslint resources/js --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore --fix"
     },
