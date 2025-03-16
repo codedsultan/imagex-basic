@@ -24,14 +24,15 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Vite::prefetch(concurrency: 3);
+        if ($this->app->environment('production')) {
+            LogViewer::auth(function ($request) {
+                // return true to allow viewing the Log Viewer.
+                return $request->user()
+                    && in_array($request->user()->email, [
+                        'test@example.com',
+                    ]);
 
-        LogViewer::auth(function ($request) {
-            // return true to allow viewing the Log Viewer.
-            return $request->user()
-                && in_array($request->user()->email, [
-                    'test@example.com',
-                ]);
-
-        });
+            });
+        }
     }
 }
