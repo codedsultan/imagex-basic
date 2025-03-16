@@ -2,6 +2,9 @@
 /node_modules
 /public/build
 /public/hot
+/public/hot-saas
+/public/hot-admin
+/public/hot-user
 /public/storage
 /storage/*.key
 /storage/pail
