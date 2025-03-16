@@ -8,6 +8,8 @@
 /public/storage
 /storage/*.key
 /storage/pail
+!storage/app/public/designs/
+!storage/app/public/designs/*
 /vendor
 .env
 .env.backup
@@ -26,7 +28,7 @@ yarn-error.log
 /.zed
 .qodo
 cmd.sh
-tinkercmd.sh
+# tinkercmd.sh
 # herd.yml
 /frontend/user/node_modules
 /frontend/admin/node_modules
