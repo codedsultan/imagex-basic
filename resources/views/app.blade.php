@@ -61,27 +61,21 @@
         @endenv --}}
     @else
         @routes('users')
-        {{-- @viteReactRefresh --}}
-        {{-- @viteReactRefresh('build/user') --}}
-
-        {{-- @vite('src/app.tsx', 'build/user') --}}
-        {{-- @vite(['src/app.tsx'], 'build/user', 'hot-user') --}}
         {{
-            // Vite::reactRefresh(),
+
             Vite::useHotFile(public_path('hot-user'))
                 ->useBuildDirectory('build/user')
                 ->useManifestFilename('user-manifest.json')
                 ->withEntryPoints(['src/app.tsx'])
                 ->createAssetPathsUsing(function (string $path, ?bool $secure) {
-                    // Generate asset paths using the secure user frontend URL.
-                    // Adjust the URL if you serve assets from a CDN or different subdomain.
-                    return "https://imagex-basic.test/{$path}";
-                })
+                    // Use environment variable for the frontend URL, fallback to Laravel APP_URL
+                    $frontendUrl = env('FRONTEND_URL', env('APP_URL'));
+
+                    return "{$frontendUrl}/{$path}";
+                });
+
         }}
         @viteReactRefresh
-        {{-- {!! Vite::reactRefresh() !!} --}}
-
-
     @endif
 
     @inertiaHead
