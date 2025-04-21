@@ -6,6 +6,9 @@ USER root
 # Install the exif extension with root permissions
 RUN install-php-extensions exif
 
+# Install the gd extension
+RUN install-php-extensions gd
+
 # Install JavaScript dependencies
 ARG NODE_VERSION=20.18.0
 ENV PATH=/usr/local/node/bin:$PATH
