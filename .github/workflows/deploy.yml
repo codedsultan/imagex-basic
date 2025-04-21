@@ -169,3 +169,6 @@ jobs:
             echo "Setting permissions..."
             sudo chown -R www-data:www-data /var/www/apps/imagexbasic
             sudo chmod -R 777 /var/www/apps/imagexbasic
+            
+            # Prune Images
+            # docker image prune -f
