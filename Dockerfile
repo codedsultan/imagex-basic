@@ -3,6 +3,13 @@ FROM serversideup/php:8.3-fpm AS base
 # Switch to root so we can do root things
 USER root
 
+# Update package lists and install GD dependencies (might be redundant)
+RUN apt-get update && apt-get install -y \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libpng-dev \
+    --no-install-recommends && \
+    rm -rf /var/lib/apt/lists/*
 # Install the exif extension with root permissions
 RUN install-php-extensions exif
 
