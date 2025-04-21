@@ -166,6 +166,6 @@ jobs:
 
             # Optional: Set permissions AFTER deployment if needed for volumes etc.
             # Consider more secure permissions than 777
-            # echo "Setting permissions..."
-            # sudo chown -R www-data:www-data /path/to/volumes/like/storage
-            # sudo chmod -R 775 /path/to/volumes/like/storage
+            echo "Setting permissions..."
+            sudo chown -R www-data:www-data /var/www/apps/imagexbasic
+            sudo chmod -R 777 /var/www/apps/imagexbasic
