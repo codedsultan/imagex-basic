@@ -1,7 +1,4 @@
 
-# .github/workflows/deploy.yml
-# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
-
 name: Deploy Laravel & Build Frontend
 
 on:
@@ -38,9 +35,38 @@ jobs:
           npm ci
           npm run build
 
-  deploy:
+  build-docker-image:
     runs-on: ubuntu-latest
     needs: build-frontend
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v4
+
+    - name: Log in to GitHub Container Registry
+      uses: docker/login-action@v2
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.PAT_TOKEN }}
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Cache Docker layers
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/buildx
+        key: ${{ runner.os }}-buildx-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-buildx-
+
+    - name: Build and push Docker image
+      run: |
+        docker build -t ghcr.io/codedsultan/imagex-basic:latest .
+        docker push ghcr.io/codedsultan/imagex-basic:latest
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build-backend-image
 
     steps:
       - name: Checkout Repository
@@ -86,6 +112,6 @@ jobs:
 
             docker-compose exec -T imagexbasic composer install
 
-            docker-compose exec -T imagexbasic bash -c "cd frontend/user && npm install && npm run build && rm -rf node_modules"
+            # docker-compose exec -T imagexbasic bash -c "cd frontend/user && npm install && npm run build && rm -rf node_modules"
 
             docker-compose exec -T imagexbasic php artisan migrate --force
