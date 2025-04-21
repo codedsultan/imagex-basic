@@ -17,7 +17,7 @@ const host = process.env.APP_DOMAIN || 'localhost';
 export default defineConfig({
   define: {
     'process.env.APP_URL': JSON.stringify(process.env.APP_URL),
-    // 'process.env.ASSET_URL': JSON.stringify(process.env.ASSET_URL),
+    'process.env.USER_VITE_PORT' : JSON.stringify(process.env.USER_VITE_PORT),
   },
 
   server: {

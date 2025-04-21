@@ -13,9 +13,17 @@ import { UppyUploader } from "@/components/UppyUploader";
 import DesignCanvas from '@/components/DesignCanvas';
 import axios from 'axios';
 import { TooltipProvider } from '@radix-ui/react-tooltip';
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipTrigger,
+
+  } from "@/components/ui/tooltip"; // assuming you're using a wrapped version
+
 
 interface CreateDesignProps {
   auth: any;
+  suggestedName: string;
 }
 
 // Extend the form data with extra fields for scenario 2 (Text Design)
@@ -34,10 +42,10 @@ interface DesignFormData {
     [key: string]: any; // Allow arbitrary keys
   }
 
-export default function CreateDesign({ auth }: CreateDesignProps) {
+export default function CreateDesign({ auth,suggestedName }: CreateDesignProps) {
   const { toast } = useToast();
   const { data, setData, post, processing, errors } = useForm<DesignFormData>({
-    title: "",
+    title: suggestedName,
     description: "",
     design_data: "",
     file: null,
@@ -74,21 +82,29 @@ export default function CreateDesign({ auth }: CreateDesignProps) {
       setGeneratingThumbnail(false);
     }
   };
-  const handleSubmit = async (e: React.FormEvent) => {
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      await post(route("designs.store"));
-      toast({
-        title: "Design Created",
-        description: "Your design has been successfully saved.",
-      });
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to create design. Please try again.",
-        variant: "destructive",
-      });
-    }
+
+    post(route("designs.store"), {
+      onSuccess: () => {
+        toast({
+          title: "Design Created",
+          description: "Your design has been successfully saved.",
+        });
+      },
+      onError: (errors) => {
+        // Only show toast if it's a server error, not a validation error
+        if (!errors.title && !errors.file && !errors.description) {
+          toast({
+            title: "Something went wrong",
+            description: "Could not save your design. Please try again.",
+            variant: "destructive",
+          });
+        }
+        // else: validation errors will show inline — no toast needed
+      },
+    });
   };
 
   // Generates design via AI. The "type" can be "text" or "image".
@@ -195,12 +211,57 @@ export default function CreateDesign({ auth }: CreateDesignProps) {
             </CardHeader>
             <CardContent>
               <Tabs defaultValue="direct-upload" className="w-full">
-                <TabsList>
-                  <TabsTrigger value="direct-upload">Direct Upload</TabsTrigger>
-                  <TabsTrigger value="text-design">Text Design</TabsTrigger>
-                  <TabsTrigger value="ai-generated">AI Generated</TabsTrigger>
-                  <TabsTrigger value="image-to-design">Image to Design</TabsTrigger>
-                </TabsList>
+              <TabsList>
+                <TabsTrigger value="direct-upload">Direct Upload</TabsTrigger>
+
+                <TooltipProvider>
+                    <Tooltip>
+                    <TooltipTrigger asChild>
+                        <TabsTrigger
+                        value="text-design"
+                        className="pointer-events-none opacity-50"
+                        disabled
+                        >
+                        Text Design
+                        </TabsTrigger>
+                    </TooltipTrigger>
+                    <TooltipContent side="top" align="center">
+                        Coming Soon
+                    </TooltipContent>
+                    </Tooltip>
+
+                    <Tooltip>
+                    <TooltipTrigger asChild>
+                        <TabsTrigger
+                        value="ai-generated"
+                        className="pointer-events-none opacity-50"
+                        disabled
+                        >
+                        AI Generated
+                        </TabsTrigger>
+                    </TooltipTrigger>
+                    <TooltipContent side="top" align="center">
+                        Coming Soon
+                    </TooltipContent>
+                    </Tooltip>
+
+                    <Tooltip>
+                    <TooltipTrigger asChild>
+                        <TabsTrigger
+                        value="image-to-design"
+                        className="pointer-events-none opacity-50"
+                        disabled
+                        >
+                        Image to Design
+                        </TabsTrigger>
+                    </TooltipTrigger>
+                    <TooltipContent side="top" align="center">
+                        Coming Soon
+                    </TooltipContent>
+                    </Tooltip>
+                </TooltipProvider>
+              </TabsList>
+
 
                 <form >
                   {/* Scenario 1: Direct Upload */}
@@ -209,6 +270,7 @@ export default function CreateDesign({ auth }: CreateDesignProps) {
                       <div className="grid gap-2">
                         <label htmlFor="designName" className="block text-sm font-medium">
                           Design Name
+                          <span className="text-red-500 ml-1">*</span>
                         </label>
                         <Input
                           id="designName"
@@ -224,13 +286,18 @@ export default function CreateDesign({ auth }: CreateDesignProps) {
                         </label>
                         <Textarea
                           id="description"
+                          placeholder={`Describe your design...\nYou can mention colors, themes, or inspiration.`}
                           value={data.description}
                           onChange={(e) => setData("description", e.target.value)}
+                          className="whitespace-pre-line placeholder:italic"
+
                         />
                         {errors.description && <p className="text-sm text-red-500">{errors.description}</p>}
                       </div>
                       <div className="space-y-2">
-                        <label className="block text-sm font-medium">Upload Design</label>
+                        <label className="block text-sm font-medium">Upload Design
+                            <span className="text-red-500 ml-1">*</span>
+                        </label>
                         <FileDropzone
                           onDrop={(files) => {
                             setData("file", files[0]);
@@ -250,6 +317,7 @@ export default function CreateDesign({ auth }: CreateDesignProps) {
                             </button>
                           </div>
                         )}
+                        {errors.file && <p className="text-sm text-red-500">{errors.file}</p>}
                       </div>
                     </div>
                   </TabsContent>
@@ -277,6 +345,7 @@ export default function CreateDesign({ auth }: CreateDesignProps) {
                         <Textarea
                           id="descriptionText"
                           value={data.description}
+                          placeholder="Describe your design (optional)"
                           onChange={(e) => setData("description", e.target.value)}
                         />
                         {errors.description && <p className="text-sm text-red-500">{errors.description}</p>}

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('image_path')->nullable();
             $table->string('design_image')->nullable();
             $table->json('design_data')->nullable();
+            $table->json('metadata')->nullable();
             $table->timestamps();
         });
     }

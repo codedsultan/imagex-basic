@@ -20,8 +20,6 @@ class DesignServiceProvider extends ServiceProvider
             \App\Modules\Design\Services\DesignService::class
         );
 
-        // $this->app->bind(UserRepositoryInterface::class, EloquentUserRepository::class);
-        // $this->app->bind(UserServiceInterface::class, UserService::class);
     }
 
     public function boot()

@@ -7,6 +7,10 @@ module.exports = {
     ],
     theme: {
     	extend: {
+            transitionProperty: {
+                'scale': 'transform',
+                'opacity': 'opacity'
+            },
     		borderRadius: {
     			lg: 'var(--radius)',
     			md: 'calc(var(--radius) - 2px)',

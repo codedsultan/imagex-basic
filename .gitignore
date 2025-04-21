@@ -8,8 +8,8 @@
 /public/storage
 /storage/*.key
 /storage/pail
-!storage/app/public/
-!storage/app/public/designs/*
+# !storage/app/public/
+# !storage/app/public/designs/*
 /vendor
 .env
 .env.backup

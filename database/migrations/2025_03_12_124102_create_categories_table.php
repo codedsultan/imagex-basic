@@ -14,11 +14,15 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('slug')->unique(); // added slug
+            $table->string('slug')->unique();
             $table->text('description')->nullable();
+            $table->foreignId('parent_id')->nullable()->constrained('categories')->onDelete('cascade');
+            $table->boolean('is_gender_based')->default(false);
+            $table->enum('gender', ['male', 'female', 'unisex'])->nullable();
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

@@ -3,13 +3,30 @@
 ## Overview
 This is an open-source Laravel Inertia React application that provides a modern full-stack development experience. It utilizes Laravel as the backend, Inertia.js for server-driven frontends, and React for building dynamic user interfaces.
 
-## Features
+## Overview
 - 🚀 **Laravel Backend** – Robust API and database management
 - ⚡ **Inertia.js Integration** – Server-driven rendering without the need for a traditional REST API
 - 🎨 **React Frontend** – Dynamic UI with state management
 - 🔐 **Authentication** – User registration, login, and role-based access control (RBAC)
 - 📊 **Dashboard** – Vue Js Admin panel with analytics and reports
 - 📦 **Modular Architecture** – Easy-to-extend components and services
+
+## Features
+- Design Upload
+- Design Preview
+- Mockup Creation
+- Mockup Preview
+
+
+
+## Roadmap
+
+- Version 1: Basic Design upload & Mockup creation
+- Version 2: AI Workflow
+- ...
+
+## Demo
+[Live Demo](https://merchernet.com)
 
 ## Tech Stack
 - **Backend**: Laravel 12+, PHP 8+

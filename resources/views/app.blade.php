@@ -68,7 +68,6 @@
                 ->useManifestFilename('user-manifest.json')
                 ->withEntryPoints(['src/app.tsx'])
                 ->createAssetPathsUsing(function (string $path, ?bool $secure) {
-                    // Use environment variable for the frontend URL, fallback to Laravel APP_URL
                     $frontendUrl = env('FRONTEND_URL', env('APP_URL'));
 
                     return "{$frontendUrl}/{$path}";

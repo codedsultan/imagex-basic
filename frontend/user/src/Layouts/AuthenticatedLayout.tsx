@@ -19,18 +19,20 @@ import {
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { ChevronDown, Menu, X } from "lucide-react";
-
+import { PageProps } from '@/types';
+import { FlashMessage } from '@/components/ui/flash-message';
 export default function Authenticated({
   header,
   children,
 }: PropsWithChildren<{ header?: ReactNode }>) {
-  const user = usePage().props.auth.user;
+  const user = usePage<PageProps>().props.auth.user;
   const [sheetOpen, setSheetOpen] = useState(false);
 
   const navItems = [
     { href: route('dashboard'), label: 'Dashboard', active: route().current('dashboard') },
     // { href: '/products', label: 'Products', active: route().current('products') },
     { href: '/designs', label: 'Designs', active: route().current('designs') },
+    { href: '/mockups', label: 'Mockups', active: route().current('mockups') },
   ];
 
   return (
@@ -164,7 +166,8 @@ export default function Authenticated({
       <main>
         <>
             {children}
-            <Toaster />
+            <Toaster />  {/*  to be removed */}
+            {/* <FlashMessage /> */}
         </>
       </main>
 

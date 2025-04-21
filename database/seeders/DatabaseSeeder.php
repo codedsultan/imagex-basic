@@ -23,23 +23,27 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-        
+
 
         $user = User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
 
-        
+
 
         // Seed roles and permissions
         $this->call([
             RolesTableSeeder::class,
             PermissionsTableSeeder::class,
+            PredefinedTagsSeeder::class,
             CategorySeeder::class,
             DesignCategorySeeder::class,
             DesignSeeder::class,
             ProductSeeder::class,
+            // MockupTemplateSeeder::class,
+            TShirtMockupTemplateSeeder::class,
+            EditorTemplateSeeder::class
 
         ]);
 
@@ -50,7 +54,7 @@ class DatabaseSeeder extends Seeder
         //     $user->assignRole('user');
         // });
 
-        
+
     }
 
 

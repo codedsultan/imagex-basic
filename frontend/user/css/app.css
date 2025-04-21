@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@400;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -64,3 +66,36 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+.canvas-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+
+  .canvas-container.hidden {
+    opacity: 0;
+    transform: scale(0.98);
+    pointer-events: none;
+  }
+
+  .preview-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+
+  /* Add to your CSS file */
+.transition-scale {
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .transition-opacity {
+    transition: opacity 0.2s ease-in-out;
+  }

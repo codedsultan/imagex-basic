@@ -1,5 +1,8 @@
 import '../css/app.css';
 import './bootstrap';
+// import 'swiper/css';
+// import 'swiper/css/navigation';
+
 // import './bootstrap';
 import React, { useEffect } from 'react';
 

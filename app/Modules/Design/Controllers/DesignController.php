@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Modules\Design\Interfaces\Services\DesignServiceInterface;
 use App\Modules\Design\Models\Design;
+use Illuminate\Support\Facades\Auth;
 
 class DesignController extends Controller
 {
@@ -16,9 +17,6 @@ class DesignController extends Controller
 
     public function index(Request $request)
     {
-        // $designs = $this->designService->getUserDesigns($request->user()->id)->map(function ($design) {
-        //     return $design;
-        // });
         return Inertia::render('Designs/Index', [
             'designs' => $this->designService->getUserDesigns($request->user()->id)
         ]);
@@ -26,7 +24,12 @@ class DesignController extends Controller
 
     public function create()
     {
-        return Inertia::render('Designs/Create');
+        $user = Auth::user();
+        $nextNumber = $user->last_untitled_design_index + 1;
+        $suggestedName = "Untitled Design {$nextNumber}";
+        return Inertia::render('Designs/Create', [
+            'suggestedName' => $suggestedName
+        ]);
     }
 
     public function store(Request $request)
@@ -37,10 +40,19 @@ class DesignController extends Controller
             'file' => 'required|file|mimes:png,jpg,svg|max:2048'
         ]);
 
-        // dd($validated);
+
+        // If the user didn't type a custom name and it matches the suggested format, use & bump the counter
+        if (preg_match('/^Untitled Design (\d+)$/', $validated['title'], $matches)) {
+            $expectedNext = $request->user()->last_untitled_design_index + 1;
+
+            if ((int)$matches[1] === $expectedNext) {
+                // Only increment if it was the expected next
+                $request->user()->increment('last_untitled_design_index');
+            }
+        }
         $this->designService->createDesign(
             [
-                'title' => $validated['title'],
+                'title' => $validated['title'] ?: $request->user()->last_untitled_design_index + 1,
                 'description' => $validated['description'],
                 'user_id' => $request->user()->id
             ],
@@ -53,13 +65,12 @@ class DesignController extends Controller
 
     public function show(Design $design)
     {
-        // $design = Design::findOrFail($id);
-        // Optionally, you can ensure the preview_url is also computed
-        $design->preview_url = asset('storage/designs/thumbnails/thumb_' . $design->image_path);
+
+        $designs = Design::where('user_id', Auth::user()->id)->get();
 
         return Inertia::render('Designs/Show', [
             'design' => $design,
+            'designs' => $designs
         ]);
     }
-    // Add show, edit, update, destroy methods
 }

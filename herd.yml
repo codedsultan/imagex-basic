@@ -1,9 +1,9 @@
-name: imagex-basic
+name: imagex-free
 php: '8.3'
 secured: true
 aliases:
-    - users.imagex-basic
-    - admin.imagex-basic
+    - users.imagex-free
+    - admin.imagex-free
 
 integrations:
     forge: {  }

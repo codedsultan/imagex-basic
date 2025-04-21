@@ -11,7 +11,9 @@ return new class extends Migration
         Schema::create('media', function (Blueprint $table) {
             $table->id();
 
-            $table->morphs('model');
+            $table->string('model_id');
+            $table->string('model_type');
+
             $table->uuid()->nullable()->unique();
             $table->string('collection_name');
             $table->string('name');
@@ -27,6 +29,8 @@ return new class extends Migration
             $table->unsignedInteger('order_column')->nullable()->index();
 
             $table->nullableTimestamps();
+            $table->index(['model_id', 'model_type']);
+
         });
     }
 };

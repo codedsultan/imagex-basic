@@ -2,6 +2,66 @@
 declare module 'ziggy-js' {
   interface RouteList {
     "sanctum.csrf-cookie": [],
+    "log-viewer.hosts": [],
+    "log-viewer.folders": [],
+    "log-viewer.folders.request-download": [
+        {
+            "name": "folderIdentifier",
+            "required": true
+        }
+    ],
+    "log-viewer.folders.clear-cache": [
+        {
+            "name": "folderIdentifier",
+            "required": true
+        }
+    ],
+    "log-viewer.folders.delete": [
+        {
+            "name": "folderIdentifier",
+            "required": true
+        }
+    ],
+    "log-viewer.files": [],
+    "log-viewer.files.request-download": [
+        {
+            "name": "fileIdentifier",
+            "required": true
+        }
+    ],
+    "log-viewer.files.clear-cache": [
+        {
+            "name": "fileIdentifier",
+            "required": true
+        }
+    ],
+    "log-viewer.files.delete": [
+        {
+            "name": "fileIdentifier",
+            "required": true
+        }
+    ],
+    "log-viewer.files.clear-cache-all": [],
+    "log-viewer.files.delete-multiple-files": [],
+    "log-viewer.logs": [],
+    "log-viewer.folders.download": [
+        {
+            "name": "folderIdentifier",
+            "required": true
+        }
+    ],
+    "log-viewer.files.download": [
+        {
+            "name": "fileIdentifier",
+            "required": true
+        }
+    ],
+    "log-viewer.index": [
+        {
+            "name": "view",
+            "required": false
+        }
+    ],
     "profile.edit": [],
     "profile.update": [],
     "profile.destroy": [],
@@ -57,6 +117,55 @@ declare module 'ziggy-js' {
         {
             "name": "design",
             "required": true
+        }
+    ],
+    "mockups.create": [],
+    "mockups.editor": [],
+    "mockups.show": [
+        {
+            "name": "mockup",
+            "required": true,
+            "binding": "id"
+        }
+    ],
+    "mockups": [],
+    "mockups.save": [],
+    "mockups.update": [
+        {
+            "name": "mockup",
+            "required": true,
+            "binding": "id"
+        }
+    ],
+    "mockup-templates": [],
+    "mockup-templates.create": [],
+    "mockup-templates.store": [],
+    "mockup-templates.show": [
+        {
+            "name": "template",
+            "required": true,
+            "binding": "id"
+        }
+    ],
+    "mockup-templates.editor": [
+        {
+            "name": "template",
+            "required": true,
+            "binding": "id"
+        }
+    ],
+    "mockup-templates.update": [
+        {
+            "name": "template",
+            "required": true,
+            "binding": "id"
+        }
+    ],
+    "mockup-templates.destroy": [
+        {
+            "name": "template",
+            "required": true,
+            "binding": "id"
         }
     ],
     "products.index": [],
