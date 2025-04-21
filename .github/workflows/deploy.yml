@@ -172,8 +172,7 @@ jobs:
 
             sudo chown -R www-data:www-data /var/www/html/imagexbasic/public
             sudo chmod -R 777 /var/www/html/imagexbasic/public
-
-            
-            docker-compose exec -T imagexbasic cd frontend/user && npm install && npm run build && rm -rf node_modules && cd ../../
+            docker exec -it imagexbasic bash -c "cd frontend/user && npm install && npm run build && rm -rf node_modules && cd ../../"
+            # docker-compose exec -T imagexbasic cd frontend/user && npm install && npm run build && rm -rf node_modules && cd ../../
             # Prune Images
             # docker image prune -f
