@@ -3,7 +3,6 @@
 ## Overview
 This is an open-source Laravel Inertia React application that provides a modern full-stack development experience. It utilizes Laravel as the backend, Inertia.js for server-driven frontends, and React for building dynamic user interfaces.
 
-## Overview
 - 🚀 **Laravel Backend** – Robust API and database management
 - ⚡ **Inertia.js Integration** – Server-driven rendering without the need for a traditional REST API
 - 🎨 **React Frontend** – Dynamic UI with state management
@@ -17,7 +16,10 @@ This is an open-source Laravel Inertia React application that provides a modern 
 - Mockup Creation
 - Mockup Preview
 
-
+## TODO
+- Unit tests - In Progress
+- Integration tests - In Progress
+- CI/CD ✅
 
 ## Roadmap
 
