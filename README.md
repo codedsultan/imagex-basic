@@ -17,6 +17,7 @@ This is an open-source Laravel Inertia React application that provides a modern 
 - Mockup Preview
 
 ## TODO
+- Mobile Responsive
 - Unit tests - In Progress
 - Integration tests - In Progress
 - CI/CD - WIP

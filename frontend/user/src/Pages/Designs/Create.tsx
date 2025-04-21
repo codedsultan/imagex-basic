@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, useForm } from "@inertiajs/react";
+import { Head } from "@inertiajs/react";
+import {useForm } from "@inertiajs/react";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,8 +18,7 @@ import {
     Tooltip,
     TooltipContent,
     TooltipTrigger,
-
-  } from "@/components/ui/tooltip"; // assuming you're using a wrapped version
+} from "@/components/ui/tooltip";
 
 
 interface CreateDesignProps {
@@ -27,27 +27,30 @@ interface CreateDesignProps {
 }
 
 // Extend the form data with extra fields for scenario 2 (Text Design)
-interface DesignFormData {
+export type DesignFormData = {
     title: string;
     description: string;
     design_data: string;
-    // thumbnail: File | string | null;
-    file: File | string | null;
+    thumbnail: File | string | null;
+    file: File | null; // explicitly define `file` as `File | null`
     ai_prompt: string;
     style_color: string;
     style_shape: string;
     style_font: string;
-    style_shape_size: 200,  // default shape size (e.g., 200px)
-    style_shape_color: "#eeeeee", // default background shape color
-    [key: string]: any; // Allow arbitrary keys
+    style_shape_size: number;
+    style_shape_color: string;
+    // [key: string]: any; // Allows dynamic properties to be added
   }
 
-export default function CreateDesign({ auth,suggestedName }: CreateDesignProps) {
+
+
+export default function CreateDesign({ auth, suggestedName }: CreateDesignProps) {
   const { toast } = useToast();
   const { data, setData, post, processing, errors } = useForm<DesignFormData>({
     title: suggestedName,
     description: "",
     design_data: "",
+    thumbnail: null,
     file: null,
     ai_prompt: "",
     style_color: "#000000", // default color (black)
@@ -60,13 +63,13 @@ export default function CreateDesign({ auth,suggestedName }: CreateDesignProps) 
   const [generatingAI, setGeneratingAI] = useState(false);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [generatingThumbnail, setGeneratingThumbnail] = useState(false);
+
   const generateThumbnail = async () => {
     try {
       setGeneratingThumbnail(true);
       const response = await axios.post('/api/designs/generate-thumbnail', {
         design_data: data.design_data
       });
-
       setData('thumbnail', response.data.thumbnail);
       toast({
         title: "Preview Generated",
@@ -352,20 +355,17 @@ export default function CreateDesign({ auth,suggestedName }: CreateDesignProps) 
                       </div>
                       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                         <div className="lg:col-span-2">
-                        {/* <TooltipProvider> */}
                           <DesignCanvas
                             initialData={data.design_data}
                             onUpdate={(json) => setData("design_data", json)}
                             style={{
                               color: data.style_color,
                               shape: data.style_shape as "circle" | "rectangle" | "triangle",
-                              // must be "circle" | "rectangle" | "triangle"
                               font: data.style_font,
                               shapeSize: data.style_shape_size,
                               shapeColor: data.style_shape_color,
                             }}
                           />
-                        {/* </TooltipProvider> */}
                         </div>
                         <div className="space-y-4">
                           <div className="grid gap-2">
@@ -384,7 +384,7 @@ export default function CreateDesign({ auth,suggestedName }: CreateDesignProps) 
                           </div>
                           <div className="grid gap-2">
                             <label className="block text-sm font-medium">Generate Thumbnail</label>
-                            <Button type="button" onClick={() => {/* generate thumbnail logic */}} disabled={!data.design_data}>
+                            <Button type="button" onClick={generateThumbnail} disabled={!data.design_data}>
                               {generatingAI ? "Generating..." : "Generate Preview"}
                             </Button>
                           </div>
@@ -408,7 +408,7 @@ export default function CreateDesign({ auth,suggestedName }: CreateDesignProps) 
                         <select
                           id="styleShape"
                           value={data.style_shape}
-                          onChange={(e) => setData("style_shape", e.target.value as "circle" | "rectangle" | "triangle")}
+                          onChange={(e) => setData("style_shape", e.target.value)}
                           className="border rounded p-2"
                         >
                           <option value="">Select a shape</option>
@@ -417,29 +417,6 @@ export default function CreateDesign({ auth,suggestedName }: CreateDesignProps) 
                           <option value="triangle">Triangle</option>
                         </select>
                       </div>
-                      {/* <div className="grid gap-2">
-                        <label htmlFor="styleShapeSize" className="block text-sm font-medium">
-                          Shape Size (px)
-                        </label>
-                        <Input
-                          id="styleShapeSize"
-                          type="number"
-                          value={data.style_shape_size}
-                          onChange={(e) => setData("style_shape_size", parseInt(e.target.value, 10))}
-                          min={50}
-                        />
-                      </div> */}
-                      {/* <div className="grid gap-2">
-                        <label htmlFor="styleShapeColor" className="block text-sm font-medium">
-                          Shape Color
-                        </label>
-                        <Input
-                          id="styleShapeColor"
-                          type="color"
-                          value={data.style_shape_color}
-                          onChange={(e) => setData("style_shape_color", e.target.value)}
-                        />
-                      </div> */}
                       <div className="grid gap-2">
                         <label htmlFor="styleFont" className="block text-sm font-medium">
                           Font
