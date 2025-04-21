@@ -119,10 +119,10 @@ jobs:
             cd "${{ secrets.DEPLOY_PATH }}/../docker" # Adjust path as needed
 
             # Optional: Update docker-compose.yml or other config files if they are in Git
-            # cd "${{ secrets.DEPLOY_PATH }}"
-            # git reset --hard origin/main
-            # git pull origin main
-            # cd ../docker # Go back to docker directory
+            cd "${{ secrets.DEPLOY_PATH }}"
+            git reset --hard origin/main
+            git pull origin main
+            cd ../docker # Go back to docker directory
 
             # --- Deployment Execution ---
 
