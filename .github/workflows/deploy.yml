@@ -22,6 +22,16 @@ jobs:
           cache: 'npm'
           cache-dependency-path: frontend/user/package-lock.json
 
+      - name: Install PHP dependencies
+        run: composer install --prefer-dist --no-progress --no-scripts
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, bcmath, gd, zip
+          coverage: none
+
       - name: Install & Build User Frontend
         working-directory: frontend/user
         run: |
