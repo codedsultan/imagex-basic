@@ -116,7 +116,7 @@ jobs:
           script: |
             # Navigate to the directory containing docker-compose etc. *on the server*
             # This might be DEPLOY_PATH or ../docker depending on your structure
-            cd "${{ secrets.DEPLOY_PATH }}/../docker" # Adjust path as needed
+            # cd "${{ secrets.DEPLOY_PATH }}/../docker" # Adjust path as needed
 
             # Optional: Update docker-compose.yml or other config files if they are in Git
             cd "${{ secrets.DEPLOY_PATH }}"
