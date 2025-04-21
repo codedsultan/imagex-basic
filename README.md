@@ -19,7 +19,7 @@ This is an open-source Laravel Inertia React application that provides a modern 
 ## TODO
 - Unit tests - In Progress
 - Integration tests - In Progress
-- CI/CD ✅
+- CI/CD - WIP
 
 ## Roadmap
 
