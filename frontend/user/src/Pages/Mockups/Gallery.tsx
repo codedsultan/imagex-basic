@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
+import { Mockup } from '@/types'
 
 async function fetchMockups() {
   const response = await fetch('/api/mockups')
@@ -22,15 +23,15 @@ export default function MockupGallery() {
             <Skeleton key={i} className="h-64 w-full rounded-lg" />
           ))
         ) : (
-          mockups?.map((mockup) => (
+          mockups?.map((mockup: Mockup) => (
             <Card key={mockup.id}>
               <CardHeader>
-                <CardTitle>{mockup.design.name}</CardTitle>
+                <CardTitle>{mockup.design!.name}</CardTitle>
               </CardHeader>
               <CardContent>
-                <img 
-                  src={mockup.imageUrl} 
-                  alt={mockup.design.name} 
+                <img
+                  src={mockup.imageUrl!}
+                  alt={mockup.design!.name}
                   className="rounded-lg mb-4"
                 />
                 <div className="flex gap-2">

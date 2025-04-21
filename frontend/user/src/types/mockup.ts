@@ -21,6 +21,17 @@ export  type MockupJsonDataType = {
 export type MockupStatus = 'draft' | 'completed';
 export type PrintAreaPosition = 'front' | 'back' |'leftSleeve' | 'rightSleeve';
 
+
+export interface Design {
+    id: number;
+    name: string;
+    title: string;
+    thumbnail: string;
+    image_path: string;
+    preview_url: string;
+    full_image_url: string;
+}
+
 export interface Mockup {
     id: number;
     name: string;
@@ -40,6 +51,9 @@ export interface Mockup {
     thumbnail: string;
     created_at: string;
     updated_at: string;
+    design: Design | null;
+    imageUrl: string | null;
+
   }
 
 export interface MockupConfig {
@@ -481,6 +495,8 @@ export interface MockupTemplate {
       front_canvas_state: null,
       back_canvas_state: null,
       metadata: null,
+      design: null,
+      imageUrl: null,
       current_view: 'front',
       thumbnail: '',
       created_at: '',

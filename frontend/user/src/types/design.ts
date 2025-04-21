@@ -2,6 +2,7 @@ import { MockupLayer } from "./mockup";
 
 export interface Design {
     id: number;
+    name: string;
     title: string;
     thumbnail: string;
     image_path: string;
