@@ -26,7 +26,7 @@ This is an open-source Laravel Inertia React application that provides a modern 
 - ...
 
 ## Demo
-[Live Demo](https://merchernet.com)
+[Live Demo](https://merchersnet.com)
 
 ## Tech Stack
 - **Backend**: Laravel 12+, PHP 8+
