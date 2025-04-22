@@ -122,6 +122,11 @@ jobs:
             cd "${{ secrets.DEPLOY_PATH }}"
             git reset --hard origin/main
             git pull origin main
+            # Optional: Set permissions AFTER deployment if needed for volumes etc.
+            # Consider more secure permissions than 777
+            echo "Setting permissions..."
+            sudo chown -R www-data:www-data /var/www/apps/imagexbasic
+            sudo chmod -R 777 /var/www/apps/imagexbasic
             cd ../docker # Go back to docker directory
 
             # --- Deployment Execution ---
@@ -170,9 +175,9 @@ jobs:
             sudo chown -R www-data:www-data /var/www/apps/imagexbasic
             sudo chmod -R 777 /var/www/apps/imagexbasic
 
-            sudo chown -R www-data:www-data /var/www/html/imagexbasic/public
-            sudo chmod -R 777 /var/www/html/imagexbasic/public
-            docker exec -it imagexbasic bash -c "cd frontend/user && npm install && npm run build && rm -rf node_modules && cd ../../"
+            # sudo chown -R www-data:www-data /var/www/html/imagexbasic/public
+            # sudo chmod -R 777 /var/www/html/imagexbasic/public
+            # docker exec -it imagexbasic bash -c "cd frontend/user && npm install && npm run build && rm -rf node_modules && cd ../../"
             # docker-compose exec -T imagexbasic cd frontend/user && npm install && npm run build && rm -rf node_modules && cd ../../
             # Prune Images
             # docker image prune -f
